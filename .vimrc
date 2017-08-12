@@ -53,13 +53,13 @@ nnoremap <space> za
 " docstring show in fold
 let g:SimpylFold_docstring_preview=1
 
-" PEP8
-au BufNewFile,BufRead *.py set tabstop=4 
-au BufNewFile,BufRead *.py set softtabstop=4
-au BufNewFile,BufRead *.py set shiftwidth=4
+" PEP8, HTML
+au BufNewFile,BufRead *.py,*.html set tabstop=4 
+au BufNewFile,BufRead *.py,*.html set softtabstop=4
+au BufNewFile,BufRead *.py,*.html set shiftwidth=4
 au BufNewFile,BufRead *.py set textwidth=79
-au BufNewFile,BufRead *.py set expandtab
-au BufNewFile,BufRead *.py set autoindent
+au BufNewFile,BufRead *.py,*.html set expandtab
+au BufNewFile,BufRead *.py,*.html set autoindent
 au BufNewFile,BufRead *.py set fileformat=unix
 " Flagging Unnecessary Whitespace, This will mark extra whitespace as bad, and
 " probably color it red.
@@ -75,7 +75,11 @@ set termencoding=utf-8
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion=1
-
+let g:ycm_python_binary_path = 'python'
+let g:ycm_semantic_triggers = {
+    \   'css': [ 're!^\s{4}', 're!:\s+'],
+    \   'html': [ '</' ],
+    \ }
 "python with virtualenv support
 "py << EOF
 "import os.path
@@ -107,7 +111,9 @@ map <C-n> :NERDTreeToggle<CR>
 " change NERDTree arrows
 let g:NERDTreeDirArrowExpandable = '.'
 let g:NERDTreeDirArrowCollapsible = '.'
-
+" setting on emmet
+let g:user_emmet_settings = {'indentation' : '    '}
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
 set nu
 set clipboard=unnamed
